@@ -52,7 +52,8 @@
                     "type": "link",
                     "value": {
                         "domains": [
-                            "*.botframework.com"
+                            "*.botframework.com",
+                            "*.northwindtraders.com"
                         ]
                     }
                 }

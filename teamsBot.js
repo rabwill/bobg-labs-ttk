@@ -1,6 +1,6 @@
 const { TeamsActivityHandler } = require("botbuilder");
 const { SupplierME } = require("./messageExtensions/supplierME");
-
+const { NorthwindLinkME } = require("./messageExtensions/northwindLinkME");
 class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
@@ -29,6 +29,12 @@ class TeamsBot extends TeamsActivityHandler {
       default:
         return null;
     }
+  }
+  //use https://test.northwindtraders.com?supplierID=3
+  async handleTeamsAppBasedLinkQuery(context, query) {
+    
+    return NorthwindLinkME.linkQuery(context, query);
+
   }
 }
 
