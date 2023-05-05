@@ -16,19 +16,24 @@ class TabConfig extends React.Component {
        * This allows for the addition of query string parameters based on
        * the settings selected by the user.
        */
+      const countrySelect = document.getElementById('countrySelect');
+
+      let selectedCountryId = 0;
+      let selectedCountryName = '';
       pages.config.registerOnSaveHandler((saveEvent) => {
         const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
         pages.config
           .setConfig({
-            suggestedDisplayName: "My Tab",
+            suggestedDisplayName: selectedCountryName,
             entityId: "Test",
-            contentUrl: baseUrl + "/index.html#/tab",
-            websiteUrl: baseUrl + "/index.html#/tab",
+            contentUrl: baseUrl + `/index.html#/tab?country=${selectedCountryName}`,
+            websiteUrl: baseUrl + `/index.html#/tab?country=${selectedCountryName}`
           })
           .then(() => {
             saveEvent.notifySuccess();
           });
       });
+     
 
       /**
        * After verifying that the settings for your tab are correctly
@@ -36,7 +41,21 @@ class TabConfig extends React.Component {
        * to be valid.  This will enable the save button in the configuration
        * dialog.
        */
-      pages.config.setValidityState(true);
+      const countries = [{id:1,name:"India"},{id:2,name:"Italy"}];     
+      countries.forEach((c) => {    
+        const options = document.createElement('option');     
+          options.value = c.id;
+          options.innerText = c.name;
+          countrySelect.appendChild(options);
+      });
+
+      // When a category is selected, it's OK to save
+      countrySelect.addEventListener('change', (ev) => {
+          selectedCountryName = ev.target.options[ev.target.selectedIndex].innerText;
+          selectedCountryId = ev.target.value;
+          pages.config.setValidityState(true);
+      });
+      //
     });
 
     return (
@@ -45,6 +64,10 @@ class TabConfig extends React.Component {
         <div>
           This is where you will add your tab configuration options the user can choose when the tab
           is added to your team/group chat.
+          <p>Please select a supplier country to display in this tab</p>
+          <select id="countrySelect">
+              <option disabled="disabled" selected="selected">Select a country</option>
+          </select>
         </div>
       </div>
     );

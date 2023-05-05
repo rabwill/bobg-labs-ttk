@@ -73,7 +73,7 @@
     ],
     "configurableTabs": [
         {
-            "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/config",
+            "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/tabconfig",
             "canUpdateConfiguration": true,
             "scopes": [
                 "team",

@@ -29,7 +29,7 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/termsofuse" element={<TermsOfUse />} />
           <Route path="/tab" element={<Tab />} />
-          <Route path="/config" element={<TabConfig />} />
+          <Route path="/tabconfig" element={<TabConfig />} />
           <Route path="*" element={<Navigate to={"/tab"} />}></Route>
         </Routes>
       </Router>

@@ -10,15 +10,25 @@ export const Suppliers = () => {
       const response = await fetch("https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers");
       const data = await response.json();
       setSuppliers(data.value);
-      //deeplinking
+      
       try {
+        const searchParams = window.location.href;
         await app.initialize();
         const context = await app.getContext();
+        if (searchParams.includes('country')) {
+          const country = searchParams.match(/=(.*)/)[1];
+           const supplier = data.value.filter(x => x.Country == country)
+           if (supplier.length > 0) {
+            setSuppliers(supplier);
+           }           
+        }
+        //deeplinking
         if (context.page.subPageId) {
           const supplier = data.value.filter(x => x.SupplierID == context.page.subPageId)
           if (supplier.length > 0) {
             setSelectedSupplier(supplier[0]);
-          } else {
+          } 
+          else {
             console.error('Supplier not found or invalid data');
           }
         }
