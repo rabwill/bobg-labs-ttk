@@ -78,7 +78,14 @@
             "scopes": [
                 "team",
                 "groupchat"
-            ]
+            ],
+            "context": [
+                "channelTab",
+                "meetingChatTab",
+                "meetingDetailsTab",
+                "meetingSidePanel",
+                "meetingStage"
+              ]
         }
     ],
    
